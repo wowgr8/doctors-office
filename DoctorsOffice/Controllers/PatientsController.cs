@@ -82,5 +82,7 @@ namespace DoctorsOffice.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    // TODO AddDoctor get and post, DeleteDoctor
   }
 }
