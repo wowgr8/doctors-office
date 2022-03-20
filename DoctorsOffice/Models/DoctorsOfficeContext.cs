@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ProjectName.Models
+namespace DoctorsOffice.Models
 {
-  public class ProjectNameContext : DbContext
+  public class DoctorsOfficeContext : DbContext
   {
     public DbSet<DatabaseTablePlaceholder> DatabaseTablePlaceholder { get; set; }
-    public ProjectNameContext(DbContextOptions options) : base(options) { }
+    public DoctorsOfficeContext(DbContextOptions options) : base(options) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseLazyLoadingProxies();
