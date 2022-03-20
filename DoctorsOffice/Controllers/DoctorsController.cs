@@ -40,6 +40,13 @@ namespace DoctorsOffice.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult Details(int id)
+    {
+      Doctor foundDoctor = _db.Doctors
+        .Include(doctor => doctor.JoinEntities)
+        .ThenInclude(join => join.Patient)
+        .FirstOrDefault(model => model.DoctorId == id);
+      return View(foundDoctor);
+    }
   }
-
 }
