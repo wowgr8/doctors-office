@@ -15,7 +15,7 @@
 <ul>
   @foreach (Patient patient in Model)
   {
-    <li>Patient Name: @patient.Name - Patient Birthday: @patient.Birthday</li>
+    <li>@Html.ActionLink($"{patient.Name}", "Details", new { id = patient.PatientId})</li>
   }
 </ul>
 
