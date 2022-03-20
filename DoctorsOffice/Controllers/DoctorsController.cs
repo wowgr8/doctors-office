@@ -48,5 +48,19 @@ namespace DoctorsOffice.Controllers
         .FirstOrDefault(model => model.DoctorId == id);
       return View(foundDoctor);
     }
+
+    public ActionResult Edit(int id)
+    {
+      Doctor foundDoctor = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+      return View(foundDoctor);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Doctor doctor)
+    {
+      _db.Entry(doctor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
