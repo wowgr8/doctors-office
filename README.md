@@ -65,9 +65,6 @@ Example of complete appsettings.json:
 * Run tests by going to the test project in the terminal (DoctorsOffice.Solution/DoctorsOffice.Tests) and running the following command:  
 <code>dotnet test</code>  
 
-<br>
-* When renaming project files for new project make sure to rename all fields with "DoctorsOffice" as the directory/file name. This includes line 13 of "DoctorsOffice.Tests.csproj" to the names of your directories. 
-
 ## Known Bugs
 
 * _No known issues_
