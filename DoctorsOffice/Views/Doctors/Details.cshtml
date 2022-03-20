@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using System.Windows;
 @model DoctorsOffice.Models.Doctor
 
 <h2>Doctor Details</h2>
@@ -23,8 +24,33 @@ else
       <li>@join.Patient.Name</li>
       @using (Html.BeginForm("DeletePatient", "Doctors"))
       {
-        @Html.Hidden("joinId", @join.DoctorPatientId)
-        <input type="submit" value="Delete" />
+        <!-- Modal Button Trigger -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Delete Doctor
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Clicking delete will make this action final.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                @using (Html.BeginForm("DeletePatient", "Doctors"))
+                {
+                  @Html.Hidden("joinId", @join.DoctorPatientId)
+                  <input type="submit" value="Delete"  class="btn btn-danger"/>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
       }
     }
   </ul>

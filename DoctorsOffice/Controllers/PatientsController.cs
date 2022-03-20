@@ -105,9 +105,10 @@ namespace DoctorsOffice.Controllers
     public ActionResult DeleteDoctor(int joinId)
     {
       var joinEntry = _db.DoctorPatients.FirstOrDefault(entry => entry.DoctorPatientId == joinId);
+      int savedPatient = joinEntry.PatientId;
       _db.DoctorPatients.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = savedPatient});
     }
   }
 }
