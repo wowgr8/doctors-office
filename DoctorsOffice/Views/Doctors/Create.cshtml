@@ -2,22 +2,22 @@
   Layout = "_Layout";
 }
 
-@model DoctorsOffice.Models.Patient
+@model DoctorsOffice.Models.Doctor
 
-<h2>Enter new patient</h2>
+<h2>Enter new doctor</h2>
 
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
   
-  @Html.LabelFor(model => model.Birthday)
-  @Html.TextBoxFor(model => model.Birthday, new {type="date"})
+  @Html.LabelFor(model => model.Specialty)
+  @Html.TextBoxFor(model => model.Specialty)
 
-  @Html.Label("Select Doctor")
-  @Html.DropDownList("DoctorId")
+  @Html.Label("Select Patient")
+  @Html.DropDownList("PatientId")
 
   <input type="submit" value="Save" />
 }
 
-<p>@Html.ActionLink("Patients", "Index")</p>
+<p>@Html.ActionLink("Doctors", "Index")</p>
