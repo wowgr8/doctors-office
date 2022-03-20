@@ -77,5 +77,32 @@ namespace DoctorsOffice.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult DeletePatient(int joinId)
+    {
+      var joinEntry = _db.DoctorPatients.FirstOrDefault(entry => entry.DoctorPatientId == joinId);
+      _db.DoctorPatients.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddPatient(int id)
+    {
+      Doctor foundDoctor = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+      ViewBag.PatientId = new SelectList(_db.Patients, "PatientId", "Name");
+      return View(foundDoctor);
+    }
+
+    [HttpPost]
+    public ActionResult AddPatient(Doctor doctor, int PatientId)
+    {
+      if (PatientId !=0)
+      {
+        _db.DoctorPatients.Add(new DoctorPatient() {PatientId = PatientId, DoctorId = doctor.DoctorId});
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
   }
 }
