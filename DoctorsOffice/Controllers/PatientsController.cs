@@ -83,6 +83,31 @@ namespace DoctorsOffice.Controllers
       return RedirectToAction("Index");
     }
 
-    // TODO AddDoctor get and post, DeleteDoctor
+    public ActionResult AddDoctor(int id)
+    {
+      Patient foundPatient = _db.Patients.FirstOrDefault(patient => patient.PatientId == id);
+      ViewBag.DoctorId = new SelectList(_db.Doctors, "DoctorId", "Name");
+      return View(foundPatient);
+    }
+
+    [HttpPost]
+    public ActionResult AddDoctor(Patient patient, int DoctorId)
+    {
+      if (DoctorId !=0)
+      {
+        _db.DoctorPatients.Add(new DoctorPatient() {DoctorId = DoctorId, PatientId = patient.PatientId});
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteDoctor(int joinId)
+    {
+      var joinEntry = _db.DoctorPatients.FirstOrDefault(entry => entry.DoctorPatientId == joinId);
+      _db.DoctorPatients.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
