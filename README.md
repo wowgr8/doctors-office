@@ -78,4 +78,4 @@ dolanp1992@gmail.com
 
 _MIT_
 
-Copyright (c) _2022_ _Cesar Lopez, Karl Starkweather, & Patrick Dolan_
+Copyright (c)  _2022_ _Cesar Lopez, Karl Starkweather, & Patrick Dolan_
