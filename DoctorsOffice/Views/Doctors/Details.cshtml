@@ -2,7 +2,6 @@
   Layout = "_Layout";
 }
 
-@using System.Windows;
 @model DoctorsOffice.Models.Doctor
 
 <h2>Doctor Details</h2>
@@ -24,16 +23,16 @@ else
       @using (Html.BeginForm("DeletePatient", "Doctors"))
       {
         <!-- Modal Button Trigger -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Delete Doctor
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Patient">
+          Delete Patient
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="Patient" tabindex="-1" aria-labelledby="PatientLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="PatientLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -54,6 +53,53 @@ else
     }
   </ul>
 }
+
+@if (Model.JoinDoctorSpecialty.Count == 0)
+{
+  <p>This doctor hasn't been assigned any specialties.</p>
+}
+else
+{
+  <p><strong>Specialties:</strong></p>
+  <ul>
+    @foreach (var join in Model.JoinDoctorSpecialty)
+    {
+      <li>@join.Specialty.Name</li>
+      @using (Html.BeginForm("DeleteSpecialty", "Doctors"))
+      {
+        <!-- Modal Button Trigger -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SpecialtyModal">
+        Delete Specialty
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="SpecialtyModal" tabindex="-1" aria-labelledby="SpecialtyModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="SpecialtyModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Clicking delete will make this action final.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                @using (Html.BeginForm("DeleteSpecialty", "Doctors"))
+                {
+                  @Html.Hidden("joinId", @join.DoctorSpecialtyId)
+                  <input type="submit" value="Delete"  class="btn btn-danger"/>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+  </ul>
+}
+
+
 
 <p>@Html.ActionLink("Edit Doctor", "Edit", new { id = Model.DoctorId })</p>
 <p>@Html.ActionLink("Delete Doctor", "Delete", new { id = Model.DoctorId})</p>

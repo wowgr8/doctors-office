@@ -50,7 +50,9 @@ namespace DoctorsOffice.Controllers
     {
       Doctor foundDoctor = _db.Doctors
         .Include(doctor => doctor.JoinDoctorPatient)
-        .ThenInclude(join => join.Patient)
+        .ThenInclude(joinPatient => joinPatient.Patient)
+        .Include(doctor => doctor.JoinDoctorSpecialty)
+        .ThenInclude(joinSpecialty => joinSpecialty.Specialty)
         .FirstOrDefault(model => model.DoctorId == id);
       return View(foundDoctor);
     }
@@ -90,6 +92,16 @@ namespace DoctorsOffice.Controllers
       var joinEntry = _db.DoctorPatients.FirstOrDefault(entry => entry.DoctorPatientId == joinId);
       int savedDoctor = joinEntry.DoctorId;
       _db.DoctorPatients.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = savedDoctor});
+    }
+
+    [HttpPost]
+    public ActionResult DeleteSpecialty(int joinId)
+    {
+      var joinEntry = _db.DoctorSpecialty.FirstOrDefault(entry => entry.DoctorSpecialtyId == joinId);
+      int savedDoctor = joinEntry.DoctorId;
+      _db.DoctorSpecialty.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = savedDoctor});
     }
