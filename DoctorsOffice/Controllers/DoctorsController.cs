@@ -49,7 +49,7 @@ namespace DoctorsOffice.Controllers
     public ActionResult Details(int id)
     {
       Doctor foundDoctor = _db.Doctors
-        .Include(doctor => doctor.JoinEntities)
+        .Include(doctor => doctor.JoinDoctorPatient)
         .ThenInclude(join => join.Patient)
         .FirstOrDefault(model => model.DoctorId == id);
       return View(foundDoctor);

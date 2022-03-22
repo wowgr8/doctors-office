@@ -6,12 +6,12 @@ namespace DoctorsOffice.Models
   {
     public Patient()
     {
-      this.JoinEntities = new HashSet<DoctorPatient>();
+      this.JoinDoctorPatient = new HashSet<DoctorPatient>();
     }
 
     public int PatientId { get; set; }
     public string Name { get; set; }
     public DateTime Birthday { get; set; }
-    public virtual ICollection<DoctorPatient> JoinEntities { get; set; }
+    public virtual ICollection<DoctorPatient> JoinDoctorPatient { get; set; }
   }
 }

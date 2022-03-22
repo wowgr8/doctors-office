@@ -1,4 +1,4 @@
-@* @{
+@{
   Layout = "_Layout";
 }
 
@@ -9,9 +9,8 @@
 
 <h4>Doctor:</h4>
 <p><strong>@Html.DisplayNameFor(model => model.Name): </strong>@Html.DisplayFor(model => model.Name)</p>
-<p><strong>@Html.DisplayNameFor(model => model.Specialty): </strong>@Html.DisplayFor(model => model.Specialty)</p>
 
-@if (Model.JoinEntities.Count == 0)
+@if (Model.JoinDoctorPatient.Count == 0)
 {
   <p>This doctor hasn't been assigned any patients.</p>
 }
@@ -19,7 +18,7 @@ else
 {
   <p><strong>Patients:</strong></p>
   <ul>
-    @foreach (var join in Model.JoinEntities)
+    @foreach (var join in Model.JoinDoctorPatient)
     {
       <li>@join.Patient.Name</li>
       @using (Html.BeginForm("DeletePatient", "Doctors"))
@@ -61,4 +60,4 @@ else
 <p>@Html.ActionLink("Add Patient", "AddPatient", new {id = Model.DoctorId})</p>
 
 
- *@
+
